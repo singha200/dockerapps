@@ -1,5 +1,5 @@
 FROM python:3.8.2-slim-buster
-LABEL maintainer="Nick Janetakis <nick.janetakis@gmail.com>"
+LABEL maintainer="singha200"
 
 RUN apt-get update && apt-get install -qq -y \
   build-essential libpq-dev --fix-missing --no-install-recommends
