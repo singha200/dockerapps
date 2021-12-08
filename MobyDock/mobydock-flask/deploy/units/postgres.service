@@ -1,0 +1,18 @@
+[Unit]
+Description=Run %p
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm -f %p
+ExecStart=/usr/bin/docker run --rm --name %p \
+  -e POSTGRES_PASSWORD=thismustbedefinedbutwearenotusingit \
+  --network mobydock \
+  -v /var/lib/postgresql/data:/var/lib/postgresql/data \
+  %p:12.2
+ExecStop=/usr/bin/docker stop %p
+
+[Install]
+WantedBy=multi-user.target
